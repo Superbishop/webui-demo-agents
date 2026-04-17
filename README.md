@@ -1,31 +1,34 @@
 # 🌟 WebUI Demo Agents
 
-> 展示不同 Agent 平台可实现的 Web 交互效果，覆盖按钮、背景、文字、卡片、加载动画等常用场景。
+> 展示不同 AI Agent 平台可实现的 Web 交互效果，覆盖按钮、背景、文字、卡片、加载动画等常用场景，所有效果均为纯 CSS/JS 原生实现，无任何第三方依赖。
 
 [![Pages](https://img.shields.io/badge/GitHub%20Pages-Online-brightgreen?style=flat-square)](https://superbishop.github.io/webui-demo-agents/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-WebUI%20%7C%20Coze%20%7C%20Hermes-7c3aed?style=flat-square)](#支持的平台)
+[![Platforms](https://img.shields.io/badge/Platforms-Hermes%20%7C%20Coze%20%7C%20OpenClaw-7c3aed?style=flat-square)](#支持的平台)
 
 ---
 
 ## 📌 项目简介
 
-本项目用于集中展示和记录各 AI Agent 平台（WebUI、Coze、Heremes 等）可实现的 Web 前端交互效果。每个效果均包含：
+本项目用于集中展示和记录各 AI Agent 平台可实现的 Web 前端交互效果。每个效果均包含：
 
-- ✅ 实时演示（可交互体验）
-- ✅ 核心关键词（可直接用于 Agent 对话）
-- ✅ 技术栈说明（CSS / JavaScript 原生实现，无依赖）
+- ✅ **实时演示** — 可直接交互体验
+- ✅ **核心关键词** — 直接用于 Agent 对话，快速获取代码
+- ✅ **技术栈说明** — CSS / JavaScript 原生实现，无依赖
 
-> **目标**：帮助开发者和 AI Agent 使用者快速查询、复制和落地 Web 交互方案，降低重复造轮子的成本。
+> **核心理念**：所见即所得，关键词即代码。让 AI Agent 使用者能够快速查询、复制和落地 Web 交互方案。
 
 ---
 
-## 🎯 支持的平台
+## 🔗 在线预览
 
-| 平台 | 页面文件 | 说明 |
-|------|---------|------|
-| **Hermes** | `webui_demo_hermes.html` | 基于原生 HTML/CSS/JS，展示 45+ 交互效果 |
-| **Coze** | `webui_demo_coze.html` | 效果词典/索引页面，支持关键词速查 |
+| 平台 | 页面 | 地址 |
+|------|------|------|
+| **Hermes** | 交互效果展示 | [webui_demo_hermes.html](https://superbishop.github.io/webui-demo-agents/webui_demo_hermes.html) |
+| **OpenClaw** | 效果展示 | [webui_demo_openclaw.html](https://superbishop.github.io/webui-demo-agents/webui_demo_openclaw.html) |
+| **Coze** | 效果词典 | [webui_demo_coze.html](https://superbishop.github.io/webui-demo-agents/webui_demo_coze.html) |
+
+> GitHub Pages 初次部署或更新后约有 1-2 分钟延迟，如页面未更新请稍后刷新。
 
 ---
 
@@ -112,32 +115,34 @@
 | 分类 | 技术 |
 |------|------|
 | **结构** | HTML5 语义化标签 |
-| **样式** | CSS3（CSS Variables、Flexbox、Grid、@keyframes） |
-| **交互** | 原生 JavaScript（ES6+）|
-| **动画** | CSS Animation / Transition，无第三方库 |
-| **框架依赖** | ❌ 无（纯原生实现，可直接嵌入任何项目）|
+| **样式** | CSS3（CSS Variables、Flexbox、Grid、@keyframes、Transition） |
+| **交互** | 原生 JavaScript（ES6+，无框架） |
+| **动画** | CSS Animation / Transition，requestAnimationFrame |
+| **外部依赖** | ❌ **零依赖**，纯原生实现，可直接嵌入任何项目 |
 
 ---
 
 ## 🚀 快速使用
 
-### 方式一：直接复制效果代码
-1. 打开效果展示页面
-2. 找到对应的效果卡片，查看「关键词」区域
-3. 将关键词发送给 Agent，即可获取完整代码
-
-### 方式二：嵌入到现有项目
-```html
-<!-- 直接将 HTML/CSS/JS 代码片段复制到你的项目中 -->
-<!-- 所有效果均为单文件实现，无外部依赖 -->
+### 方式一：关键词直达
+直接在 Agent 对话中发送效果关键词，即可获得完整代码：
 ```
-
-### 方式三：通过 Agent 平台调用
-```
-示例 Prompts：
+示例：
 - "把背景改成星空效果"
 - "这个按钮加一个粒子爆炸效果"
-- "文字加火焰效果，代码给我"
+- "文字加火焰效果"
+- "给我一个玻璃态卡片"
+```
+
+### 方式二：复制完整页面
+1. 下载对应的 `.html` 文件
+2. 直接在浏览器中打开预览
+3. 通过开发者工具（F12）查看源码，复制所需效果代码
+
+### 方式三：嵌入现有项目
+```html
+<!-- 所有效果均为单文件实现，无任何外部依赖 -->
+<!-- 直接将 CSS 和 JS 代码片段复制到你的项目中即可使用 -->
 ```
 
 ---
@@ -146,10 +151,11 @@
 
 ```
 webui-demo-agents/
-├── README.md                 # 项目说明文档
-├── LICENSE                   # MIT 开源协议
-├── webui_demo_hermes.html    # Hermes 交互效果展示（主页面）
-└── webui_demo_coze.html      # Coze 效果词典页面
+├── README.md                    # 项目说明文档
+├── LICENSE                      # MIT 开源协议
+├── webui_demo_hermes.html       # Hermes 平台效果展示（左侧导航+卡片网格布局）
+├── webui_demo_openclaw.html     # OpenClaw 平台效果展示
+└── webui_demo_coze.html         # Coze 平台效果词典
 ```
 
 ---
@@ -160,12 +166,12 @@ webui-demo-agents/
 
 ### 提交新效果
 1. 在对应页面的分类区块下新增卡片
-2. 卡片需包含：图标、标题、描述、效果演示、关键词
+2. 卡片需包含：图标、标题、描述、效果演示、关键词标签
 3. 关键词格式：`<span class="tag">关键词</span>`
 
-### 修复问题
-- 优先通过 Issue 描述问题
-- 提交 PR 时请注明修复内容和原因
+### 报告问题
+- 通过 [GitHub Issues](https://github.com/Superbishop/webui-demo-agents/issues/new) 描述问题
+- 请注明：使用的平台、浏览器版本、问题描述和复现步骤
 
 ---
 
@@ -177,9 +183,9 @@ webui-demo-agents/
 
 ## 📬 联系方式
 
-- **GitHub Issues**: [New Issue](https://github.com/Superbishop/webui-demo-agents/issues/new)
+- **GitHub Issues**: [提交新 Issue](https://github.com/Superbishop/webui-demo-agents/issues/new)
 - **仓库地址**: https://github.com/Superbishop/webui-demo-agents
 
 ---
 
-> 💡 **小提示**：直接在对话中描述你想要的效果（如"给我一个霓虹辉光按钮"），AI Agent 可直接生成对应代码并嵌入你的项目使用。
+> 💡 **使用提示**：每个效果页面中的「关键词」区域是对接 AI Agent 的核心入口，直接发送关键词给 Agent，即可获得可投入生产使用的完整代码。
