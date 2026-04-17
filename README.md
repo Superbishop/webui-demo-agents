@@ -4,7 +4,7 @@
 
 [![Pages](https://img.shields.io/badge/GitHub%20Pages-Online-brightgreen?style=flat-square)](https://superbishop.github.io/webui-demo-agents/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Platforms](https://img.shields.io/badge/Platforms-Hermes%20%7C%20Coze%20%7C%20OpenClaw-7c3aed?style=flat-square)](#支持的平台)
+[![Platforms](https://img.shields.io/badge/Platforms-Hermes%20%7C%20Coze%20%7C%20OpenClaw%20%7C%20ClaudeCode-7c3aed?style=flat-square)](#支持的平台)
 
 ---
 
@@ -25,6 +25,7 @@
 | 平台 | 页面 | 地址 |
 |------|------|------|
 | **Hermes** | 交互效果展示 | [webui_demo_hermes.html](https://superbishop.github.io/webui-demo-agents/webui_demo_hermes.html) |
+| **Claude Code** | 效果展示 | [webui_demo_claudecode.html](https://superbishop.github.io/webui-demo-agents/webui_demo_claudecode.html) |
 | **OpenClaw** | 效果展示 | [webui_demo_openclaw.html](https://superbishop.github.io/webui-demo-agents/webui_demo_openclaw.html) |
 | **Coze** | 效果词典 | [webui_demo_coze.html](https://superbishop.github.io/webui-demo-agents/webui_demo_coze.html) |
 
@@ -153,7 +154,8 @@
 webui-demo-agents/
 ├── README.md                    # 项目说明文档
 ├── LICENSE                      # MIT 开源协议
-├── webui_demo_hermes.html       # Hermes 平台效果展示（左侧导航+卡片网格布局）
+├── webui_demo_hermes.html       # Hermes 平台效果展示
+├── webui_demo_claudecode.html   # Claude Code 平台效果展示
 ├── webui_demo_openclaw.html     # OpenClaw 平台效果展示
 └── webui_demo_coze.html         # Coze 平台效果词典
 ```
