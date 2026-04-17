@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交互效果词典 完整版 - 小扣的效果展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #ff00ff, #00d9ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 3s linear infinite;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1.1em;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 30px;
+            padding-left: 15px;
+            border-left: 4px solid #00d9ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon {
+            font-size: 1.2em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+            border-color: rgba(0, 217, 255, 0.3);
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #00d9ff;
+        }
+
+        .keyword-tag {
+            display: inline-block;
+            background: rgba(0, 217, 255, 0.2);
+            color: #00d9ff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .demo-area {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* ========== 基础按钮效果 ========== */
+        
+        .btn-base {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hover-color {
+            background: #00d9ff;
+            color: #000;
+        }
+        .btn-hover-color:hover {
+            background: #ff00ff;
+            transform: scale(1.05);
+        }
+
+        .btn-ripple {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+        .btn-ripple::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10%);
+            transform: scale(10);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .btn-ripple:active::after {
+            transform: scale(0);
+            opacity: 1;
+            transition: 0s;
+        }
+
+        .btn-glow {
+            background: #00d9ff;
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+        .btn-glow:hover {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.8), 0 0 60px rgba(0, 217, 255, 0.4);
+        }
+
+        .btn-3d {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            transform-style: preserve-3d;
+        }
+        .btn-3d:hover {
+            transform: rotateX(15deg) rotateY(-15deg);
+        }
+
+        .btn-bounce {
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            color: #fff;
+        }
+        .btn-bounce:hover {
+            animation: bounce 0.5s ease;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn-border-animate {
+            position: relative;
+            background: transparent;
+            color: #00d9ff;
+        }
+        .btn-border-animate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            background: linear-gradient(90deg, #00d9ff, #ff00ff, #00d9ff) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: borderRotate 3s linear infinite;
+        }
+        @keyframes borderRotate {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .btn-loading {
+            background: #4CAF50;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .btn-shake {
+            background: #e74c3c;
+            color: #fff;
+        }
+        .btn-shake:hover {
+            animation: shake 0.5s ease;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .btn-elastic {
+            background: #9b59b6;
+            color: #fff;
+        }
+        .btn-elastic:hover {
+            animation: elastic 0.5s ease;
+        }
+        @keyframes elastic {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.25); }
+            40% { transform: scale(0.75); }
+            50% { transform: scale(1.15); }
+            65% { transform: scale(0.95); }
+            75% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-shadow-spread {
+            background: #1abc9c;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(26, 188, 156, 0.4);
+        }
+        .btn-shadow-spread:hover {
+            box-shadow: 0 10px 30px rgba(26, 188, 156, 0.6), 0 5px 15px rgba(26, 188, 156, 0.4);
+            transform: translateY(-3px);
+        }
+
+        /* ========== 背景效果 ========== */
+        
+        .bg-gradient-flow {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 5s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-wave {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-wave::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 30px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23ffffff' d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C57.1,118.92,156.63,69.08,321.39,56.44Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave 3s linear infinite;
+        }
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .bg-starfield {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .bg-particles {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: #0a0a0a;
+            position: relative;
+            overflow: hidden;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00d9ff;
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        /* 极光效果 */
+        .bg-aurora {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        .aurora {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(from 0deg, transparent, #00ff88, transparent, #00d9ff, transparent, #ff00ff, transparent);
+            animation: auroraRotate 8s linear infinite;
+            opacity: 0.3;
+            filter: blur(30px);
+        }
+        @keyframes auroraRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 噪点纹理 */
+        .bg-noise {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-noise::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.15;
+        }
+
+        /* 故障风 */
+        .bg-glitch {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            position: relative;
+            overflow: hidden;
+        }
+        .bg-glitch::before, .bg-glitch::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,0,100,0.1) 45%, rgba(0,255,200,0.1) 50%, transparent 55%);
+            animation: glitchShift 2s infinite;
+        }
+        .bg-glitch::after {
+            animation-delay: 0.5s;
+        }
+        @keyframes glitchShift {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-3px); }
+            40% { transform: translateX(3px); }
+            60% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+        }
+
+        /* ========== 文字效果 ========== */
+        
+        .text-gradient {
+            font-size: 28px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d9ff, #ff00ff, #f5af19);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textGradient 3s linear infinite;
+        }
+        @keyframes textGradient {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .text-typewriter {
+            font-size: 20px;
+            border-right: 2px solid #00d9ff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typewriter 3s steps(20) infinite, blink 0.5s step-end infinite alternate;
+        }
+        @keyframes typewriter {
+            0%, 100% { width: 0; }
+            50%, 90% { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .text-neon {
+            font-size: 28px;
+            color: #fff;
+            text-shadow: 0 0 5px #00d9ff, 0 0 10px #00d9ff, 0 0 20px #00d9ff, 0 0 40px #00d9ff;
+            animation: neonPulse 2s ease-in-out infinite;
+        }
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 5px #00d9ff, 0 0 10px #00d9ff, 0 0 20px #00d9ff; }
+            50% { text-shadow: 0 0 10px #00d9ff, 0 0 20px #00d9ff, 0 0 40px #00d9ff, 0 0 80px #00d9ff; }
+        }
+
+        .text-blink {
+            font-size: 24px;
+            color: #ff00ff;
+            animation: textBlink 1s infinite;
+        }
+        @keyframes textBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* 逐字动画 */
+        .text-char-animate {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .text-char-animate span {
+            display: inline-block;
+            animation: charBounce 0.5s ease infinite;
+        }
+        @keyframes charBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* 文字波浪 */
+        .text-wave {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00d9ff;
+        }
+        .text-wave span {
+            display: inline-block;
+            animation: textWave 1.5s ease-in-out infinite;
+        }
+        @keyframes textWave {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 故障文字 */
+        .text-glitch {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            position: relative;
+            animation: textGlitch 1s infinite;
+        }
+        .text-glitch::before, .text-glitch::after {
+            content: 'GLITCH';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .text-glitch::before {
+            color: #ff00ff;
+            animation: glitchText1 0.5s infinite;
+        }
+        .text-glitch::after {
+            color: #00ffff;
+            animation: glitchText2 0.5s infinite;
+        }
+        @keyframes textGlitch {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.8; }
+            94% { opacity: 1; }
+        }
+        @keyframes glitchText1 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(2px); }
+            60% { clip-path: inset(60% 0 20% 0); transform: translate(-2px); }
+        }
+        @keyframes glitchText2 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(60% 0 20% 0); transform: translate(2px); }
+            40% { clip-path: inset(20% 0 60% 0); transform: translate(-2px); }
+            60% { clip-path: inset(40% 0 40% 0); transform: translate(2px); }
+        }
+
+        /* ========== 卡片效果 ========== */
+        
+        .card-float {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .card-float:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .card-flip-container {
+            width: 120px;
+            height: 80px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card-flip-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        .card-flip-container:hover .card-flip-inner {
+            transform: rotateY(180deg);
+        }
+        .card-flip-front, .card-flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .card-flip-front {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .card-flip-back {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transform: rotateY(180deg);
+        }
+
+        .card-rotate {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.5s ease;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .card-rotate:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        /* ========== 其他交互 ========== */
+        
+        .switch {
+            width: 60px;
+            height: 30px;
+            background: #333;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .switch::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: #fff;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+        .switch.active {
+            background: #00d9ff;
+        }
+        .switch.active::after {
+            transform: translateX(30px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d9ff, #ff00ff);
+            border-radius: 5px;
+            animation: progressAnim 2s ease-in-out infinite;
+        }
+        @keyframes progressAnim {
+            0% { width: 0%; }
+            50% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        .pulse {
+            width: 50px;
+            height: 50px;
+            background: #00d9ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .pulse::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #00d9ff;
+            border-radius: 50%;
+            animation: pulseAnim 2s ease-out infinite;
+        }
+        @keyframes pulseAnim {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .tabs {
+            display: flex;
+            gap: 5px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 8px 8px 0 0;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: #00d9ff;
+            color: #000;
+        }
+
+        /* ========== 动画序列效果 ========== */
+        
+        /* 入场动画 */
+        .entrance-fade-up {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            animation: fadeUp 2s ease-out infinite;
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .entrance-scale {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 10px;
+            animation: scaleIn 2s ease-out infinite;
+        }
+        @keyframes scaleIn {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .entrance-slide-left {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 10px;
+            animation: slideLeft 2s ease-out infinite;
+        }
+        @keyframes slideLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .entrance-rotate {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-radius: 10px;
+            animation: rotateIn 2s ease-out infinite;
+        }
+        @keyframes rotateIn {
+            0% { opacity: 0; transform: rotate(-180deg) scale(0); }
+            100% { opacity: 1; transform: rotate(0) scale(1); }
+        }
+
+        /* 序列动画 */
+        .sequence-demo {
+            display: flex;
+            gap: 10px;
+        }
+        .sequence-item {
+            width: 40px;
+            height: 40px;
+            background: #00d9ff;
+            border-radius: 8px;
+            animation: sequenceBounce 1.5s ease-in-out infinite;
+        }
+        .sequence-item:nth-child(2) { animation-delay: 0.1s; }
+        .sequence-item:nth-child(3) { animation-delay: 0.2s; }
+        .sequence-item:nth-child(4) { animation-delay: 0.3s; }
+        @keyframes sequenceBounce {
+            0%, 80%, 100% { transform: scale(1); }
+            40% { transform: scale(1.3); background: #ff00ff; }
+        }
+
+        /* ========== 鼠标交互效果 ========== */
+        
+        /* 光标跟随区域 */
+        .cursor-follow-area {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+        .cursor-dot {
+            width: 20px;
+            height: 20px;
+            background: #00d9ff;
+            border-radius: 50%;
+            position: absolute;
+            pointer-events: none;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px #00d9ff;
+        }
+
+        /* 磁吸效果 */
+        .magnetic-area {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .magnetic-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* 拖尾效果区域 */
+        .trail-area {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        /* ========== 数据可视化效果 ========== */
+        
+        /* 环形进度 */
+        .ring-progress {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+        .ring-progress svg {
+            transform: rotate(-90deg);
+        }
+        .ring-progress circle {
+            fill: none;
+            stroke-width: 6;
+        }
+        .ring-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        .ring-fill {
+            stroke: #00d9ff;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: ringFill 2s ease-out infinite;
+        }
+        @keyframes ringFill {
+            0% { stroke-dashoffset: 220; }
+            100% { stroke-dashoffset: 55; }
+        }
+        .ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 数字跳动 */
+        .number-animate {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00d9ff;
+            font-family: monospace;
+        }
+
+        /* 动态柱状图 */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 60px;
+        }
+        .bar {
+            width: 20px;
+            background: linear-gradient(180deg, #00d9ff, #764ba2);
+            border-radius: 4px 4px 0 0;
+            animation: barGrow 1.5s ease-in-out infinite;
+        }
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes barGrow {
+            0%, 100% { height: 20px; }
+            50% { height: 60px; }
+        }
+
+        /* ========== 游戏化效果 ========== */
+        
+        /* 粒子爆炸 */
+        .explosion-area {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .explosion-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .explosion-btn:active {
+            animation: explode 0.3s ease-out;
+        }
+        @keyframes explode {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .explosion-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ff00ff;
+            border-radius: 50%;
+            animation: particleExplode 0.5s ease-out forwards;
+        }
+        @keyframes particleExplode {
+            0% { opacity: 1; transform: translate(0, 0) scale(1); }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+        }
+
+        /* 弹跳球 */
+        .ball-area {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .ball {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #00d9ff, #00f2fe);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            animation: ballBounce 1s ease-in-out infinite;
+        }
+        @keyframes ballBounce {
+            0%, 100% { bottom: 10px; left: 20px; }
+            25% { bottom: 60px; left: 40px; }
+            50% { bottom: 10px; left: 60px; }
+            75% { bottom: 60px; left: 80px; }
+        }
+
+        /* 抽奖转盘 */
+        .wheel-demo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#ff00ff 0deg 60deg, #00d9ff 60deg 120deg, #f5af19 120deg 180deg, #00f2fe 180deg 240deg, #f093fb 240deg 300deg, #4facfe 300deg 360deg);
+            animation: wheelSpin 3s linear infinite;
+            position: relative;
+        }
+        .wheel-demo::after {
+            content: '►';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+        }
+        @keyframes wheelSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== 组合效果示例 ========== */
+        
+        .combo-card {
+            width: 100%;
+            height: 180px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 组合1: 星空+霓虹+发光按钮 */
+        .combo-1 {
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            position: relative;
+        }
+        .combo-1 .combo-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px #00d9ff, 0 0 10px #00d9ff, 0 0 20px #00d9ff;
+        }
+        .combo-1 .combo-btn {
+            padding: 10px 25px;
+            background: #00d9ff;
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .combo-1 .combo-btn:hover {
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.8);
+        }
+
+        /* 组合2: 渐变流动+波浪+打字机 */
+        .combo-2 {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 5s ease infinite;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .combo-2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 30px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='rgba(255,255,255,0.3)' d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C57.1,118.92,156.63,69.08,321.39,56.44Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+            animation: wave 3s linear infinite;
+        }
+        .combo-2 .combo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            border-right: 2px solid #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typewriter 3s steps(15) infinite, blink 0.5s step-end infinite alternate;
+        }
+
+        /* 组合3: 极光+粒子+渐变文字 */
+        .combo-3 {
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .combo-3::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: conic-gradient(from 0deg, transparent, #00ff88, transparent, #00d9ff, transparent, #ff00ff, transparent);
+            animation: auroraRotate 8s linear infinite;
+            opacity: 0.4;
+            filter: blur(40px);
+        }
+        .combo-3 .combo-title {
+            font-size: 26px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00ff88, #00d9ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textGradient 3s linear infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 组合4: 故障风+霓虹+抖动按钮 */
+        .combo-4 {
+            background: linear-gradient(45deg, #0a0a0a, #1a1a1a);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            overflow: hidden;
+        }
+        .combo-4::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 40%, rgba(255,0,100,0.1) 45%, rgba(0,255,200,0.1) 50%, transparent 55%);
+            animation: glitchShift 2s infinite;
+        }
+        .combo-4 .combo-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            position: relative;
+            z-index: 1;
+        }
+        .combo-4 .combo-btn {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border: none;
+            border-radius: 8px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s;
+        }
+        .combo-4 .combo-btn:hover {
+            animation: shake 0.5s ease;
+        }
+
+        /* 组合5: 环形进度+数字跳动+脉冲 */
+        .combo-5 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            position: relative;
+        }
+        .combo-5 .ring-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .combo-5 .ring-container svg {
+            transform: rotate(-90deg);
+        }
+        .combo-5 .ring-container circle {
+            fill: none;
+            stroke-width: 6;
+        }
+        .combo-5 .ring-bg {
+            stroke: rgba(255,255,255,0.1);
+        }
+        .combo-5 .ring-fill {
+            stroke: #00d9ff;
+            stroke-linecap: round;
+            stroke-dasharray: 220;
+            stroke-dashoffset: 220;
+            animation: ringFill 2s ease-out infinite;
+        }
+        .combo-5 .ring-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+            font-weight: bold;
+            color: #00d9ff;
+        }
+        .combo-5 .pulse-indicator {
+            width: 40px;
+            height: 40px;
+            background: #00d9ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .combo-5 .pulse-indicator::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #00d9ff;
+            border-radius: 50%;
+            animation: pulseAnim 2s ease-out infinite;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: #666;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer .logo {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00d9ff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 交互效果词典 完整版</h1>
+        <p class="subtitle">全覆盖效果展示 + 组合示例 —— 小扣 🪝</p>
+
+        <!-- 按钮效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🔘</span> 按钮效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">悬停变色</h3>
+                    <div><span class="keyword-tag">hover-change</span><span class="keyword-tag">悬停变色</span></div>
+                    <div class="demo-area"><button class="btn-base btn-hover-color">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">点击涟漪</h3>
+                    <div><span class="keyword-tag">ripple</span><span class="keyword-tag">涟漪</span></div>
+                    <div class="demo-area"><button class="btn-base btn-ripple">点击试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">发光效果</h3>
+                    <div><span class="keyword-tag">glow</span><span class="keyword-tag">发光</span></div>
+                    <div class="demo-area"><button class="btn-base btn-glow">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">3D翻转</h3>
+                    <div><span class="keyword-tag">3d-flip</span><span class="keyword-tag">立体翻转</span></div>
+                    <div class="demo-area"><button class="btn-base btn-3d">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">弹跳效果</h3>
+                    <div><span class="keyword-tag">bounce</span><span class="keyword-tag">弹跳</span></div>
+                    <div class="demo-area"><button class="btn-base btn-bounce">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">流光边框</h3>
+                    <div><span class="keyword-tag">border-animate</span><span class="keyword-tag">流光边框</span></div>
+                    <div class="demo-area"><button class="btn-base btn-border-animate">流光边框</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">加载动画</h3>
+                    <div><span class="keyword-tag">loading</span><span class="keyword-tag">加载中</span></div>
+                    <div class="demo-area"><button class="btn-base btn-loading">加载中</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">抖动效果</h3>
+                    <div><span class="keyword-tag">shake</span><span class="keyword-tag">抖动</span></div>
+                    <div class="demo-area"><button class="btn-base btn-shake">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">弹性效果</h3>
+                    <div><span class="keyword-tag">elastic</span><span class="keyword-tag">弹性</span></div>
+                    <div class="demo-area"><button class="btn-base btn-elastic">悬停试试</button></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">阴影扩散</h3>
+                    <div><span class="keyword-tag">shadow-spread</span><span class="keyword-tag">阴影扩散</span></div>
+                    <div class="demo-area"><button class="btn-base btn-shadow-spread">悬停试试</button></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 背景效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🌈</span> 背景效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">渐变流动</h3>
+                    <div><span class="keyword-tag">gradient-flow</span><span class="keyword-tag">渐变流动</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-gradient-flow"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">波浪效果</h3>
+                    <div><span class="keyword-tag">wave</span><span class="keyword-tag">波浪</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-wave"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">星空效果</h3>
+                    <div><span class="keyword-tag">starfield</span><span class="keyword-tag">星空</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-starfield" id="starfield"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">粒子飘浮</h3>
+                    <div><span class="keyword-tag">particles</span><span class="keyword-tag">粒子</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-particles" id="particles"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">极光效果</h3>
+                    <div><span class="keyword-tag">aurora</span><span class="keyword-tag">极光</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-aurora"><div class="aurora"></div></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">噪点纹理</h3>
+                    <div><span class="keyword-tag">noise</span><span class="keyword-tag">噪点</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-noise"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">故障风格</h3>
+                    <div><span class="keyword-tag">glitch</span><span class="keyword-tag">故障风</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;"><div class="bg-glitch"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文字效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">✨</span> 文字效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">渐变文字</h3>
+                    <div><span class="keyword-tag">text-gradient</span><span class="keyword-tag">渐变文字</span></div>
+                    <div class="demo-area"><span class="text-gradient">渐变流动文字</span></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">打字机效果</h3>
+                    <div><span class="keyword-tag">typewriter</span><span class="keyword-tag">打字机</span></div>
+                    <div class="demo-area"><span class="text-typewriter">打字机效果演示</span></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">霓虹文字</h3>
+                    <div><span class="keyword-tag">neon</span><span class="keyword-tag">霓虹</span></div>
+                    <div class="demo-area"><span class="text-neon">霓虹灯光</span></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">闪烁文字</h3>
+                    <div><span class="keyword-tag">text-blink</span><span class="keyword-tag">闪烁</span></div>
+                    <div class="demo-area"><span class="text-blink">闪烁的文字</span></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">逐字动画</h3>
+                    <div><span class="keyword-tag">char-animate</span><span class="keyword-tag">逐字动画</span></div>
+                    <div class="demo-area"><div class="text-char-animate" id="charAnim"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">文字波浪</h3>
+                    <div><span class="keyword-tag">text-wave</span><span class="keyword-tag">文字波浪</span></div>
+                    <div class="demo-area"><div class="text-wave" id="textWave"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">故障文字</h3>
+                    <div><span class="keyword-tag">text-glitch</span><span class="keyword-tag">故障文字</span></div>
+                    <div class="demo-area"><span class="text-glitch">GLITCH</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🃏</span> 卡片效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">悬浮卡片</h3>
+                    <div><span class="keyword-tag">card-float</span><span class="keyword-tag">悬浮卡片</span></div>
+                    <div class="demo-area"><div class="card-float">悬停试试</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">翻转卡片</h3>
+                    <div><span class="keyword-tag">card-flip</span><span class="keyword-tag">翻转卡片</span></div>
+                    <div class="demo-area">
+                        <div class="card-flip-container">
+                            <div class="card-flip-inner">
+                                <div class="card-flip-front">正面</div>
+                                <div class="card-flip-back">背面</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">旋转卡片</h3>
+                    <div><span class="keyword-tag">card-rotate</span><span class="keyword-tag">旋转卡片</span></div>
+                    <div class="demo-area"><div class="card-rotate">悬停试试</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 其他交互 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">⚡</span> 其他交互</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">开关按钮</h3>
+                    <div><span class="keyword-tag">switch</span><span class="keyword-tag">开关</span></div>
+                    <div class="demo-area"><div class="switch" onclick="this.classList.toggle('active')"></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">进度条</h3>
+                    <div><span class="keyword-tag">progress</span><span class="keyword-tag">进度条</span></div>
+                    <div class="demo-area" style="padding: 25px 20px;"><div class="progress-bar"><div class="progress-fill"></div></div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">脉冲效果</h3>
+                    <div><span class="keyword-tag">pulse</span><span class="keyword-tag">脉冲</span></div>
+                    <div class="demo-area"><div class="pulse">🔔</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">标签页</h3>
+                    <div><span class="keyword-tag">tabs</span><span class="keyword-tag">标签页</span></div>
+                    <div class="demo-area" style="flex-direction: column; align-items: stretch;">
+                        <div class="tabs">
+                            <button class="tab active" onclick="switchTab(this)">标签1</button>
+                            <button class="tab" onclick="switchTab(this)">标签2</button>
+                            <button class="tab" onclick="switchTab(this)">标签3</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 动画序列效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🎬</span> 动画序列效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">淡入上移</h3>
+                    <div><span class="keyword-tag">entrance-fade-up</span><span class="keyword-tag">入场淡入</span></div>
+                    <div class="demo-area"><div class="entrance-fade-up">淡入上移</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">缩放入场</h3>
+                    <div><span class="keyword-tag">entrance-scale</span><span class="keyword-tag">缩放入场</span></div>
+                    <div class="demo-area"><div class="entrance-scale">缩放入场</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">左侧滑入</h3>
+                    <div><span class="keyword-tag">entrance-slide-left</span><span class="keyword-tag">滑入</span></div>
+                    <div class="demo-area"><div class="entrance-slide-left">左侧滑入</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">旋转入场</h3>
+                    <div><span class="keyword-tag">entrance-rotate</span><span class="keyword-tag">旋转入场</span></div>
+                    <div class="demo-area"><div class="entrance-rotate">旋转入场</div></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">序列动画</h3>
+                    <div><span class="keyword-tag">sequence</span><span class="keyword-tag">序列动画</span></div>
+                    <div class="demo-area">
+                        <div class="sequence-demo">
+                            <div class="sequence-item"></div>
+                            <div class="sequence-item"></div>
+                            <div class="sequence-item"></div>
+                            <div class="sequence-item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 鼠标交互效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🖱️</span> 鼠标交互效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">光标跟随</h3>
+                    <div><span class="keyword-tag">cursor-follow</span><span class="keyword-tag">光标跟随</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="cursor-follow-area" id="cursorFollow">
+                            <div class="cursor-dot" id="cursorDot"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">磁吸效果</h3>
+                    <div><span class="keyword-tag">magnetic</span><span class="keyword-tag">磁吸</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="magnetic-area" id="magneticArea">
+                            <div class="magnetic-btn" id="magneticBtn">悬停试试</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">鼠标拖尾</h3>
+                    <div><span class="keyword-tag">cursor-trail</span><span class="keyword-tag">拖尾</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="trail-area" id="trailArea">移动鼠标试试</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 数据可视化效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">📊</span> 数据可视化效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">环形进度</h3>
+                    <div><span class="keyword-tag">ring-progress</span><span class="keyword-tag">环形进度</span></div>
+                    <div class="demo-area">
+                        <div class="ring-progress">
+                            <svg width="80" height="80">
+                                <circle class="ring-bg" cx="40" cy="40" r="35"></circle>
+                                <circle class="ring-fill" cx="40" cy="40" r="35"></circle>
+                            </svg>
+                            <span class="ring-text">75%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">数字跳动</h3>
+                    <div><span class="keyword-tag">number-animate</span><span class="keyword-tag">数字跳动</span></div>
+                    <div class="demo-area"><span class="number-animate" id="numberAnim">0</span></div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">动态柱状图</h3>
+                    <div><span class="keyword-tag">bar-chart</span><span class="keyword-tag">柱状图</span></div>
+                    <div class="demo-area">
+                        <div class="bar-chart">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏化效果 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🎮</span> 游戏化效果</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3 class="card-title">粒子爆炸</h3>
+                    <div><span class="keyword-tag">explosion</span><span class="keyword-tag">粒子爆炸</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="explosion-area" id="explosionArea">
+                            <div class="explosion-btn">点击试试</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">弹跳球</h3>
+                    <div><span class="keyword-tag">bouncing-ball</span><span class="keyword-tag">弹跳球</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="ball-area"><div class="ball"></div></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">抽奖转盘</h3>
+                    <div><span class="keyword-tag">wheel</span><span class="keyword-tag">转盘</span></div>
+                    <div class="demo-area"><div class="wheel-demo"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 组合效果示例 -->
+        <div class="section">
+            <h2 class="section-title"><span class="icon">🎨</span> 组合效果示例</h2>
+            <p style="color: #888; margin-bottom: 20px;">多个效果叠加，一键调用</p>
+            <div class="grid">
+                <div class="card" style="grid-column: span 1;">
+                    <h3 class="card-title">组合1: 星空+霓虹+发光按钮</h3>
+                    <div><span class="keyword-tag">combo-starlight</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="combo-card combo-1" id="combo1">
+                            <span class="combo-title">星空主题</span>
+                            <button class="combo-btn">开始探索</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: span 1;">
+                    <h3 class="card-title">组合2: 渐变流动+波浪+打字机</h3>
+                    <div><span class="keyword-tag">combo-ocean</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="combo-card combo-2">
+                            <span class="combo-text">欢迎来到海洋世界</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: span 1;">
+                    <h3 class="card-title">组合3: 极光+粒子+渐变文字</h3>
+                    <div><span class="keyword-tag">combo-aurora</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="combo-card combo-3">
+                            <span class="combo-title">极光幻境</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: span 1;">
+                    <h3 class="card-title">组合4: 故障风+霓虹+抖动按钮</h3>
+                    <div><span class="keyword-tag">combo-glitch</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="combo-card combo-4">
+                            <span class="combo-title">赛博朋克</span>
+                            <button class="combo-btn">进入系统</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="grid-column: span 1;">
+                    <h3 class="card-title">组合5: 环形进度+数字+脉冲</h3>
+                    <div><span class="keyword-tag">combo-data</span></div>
+                    <div class="demo-area" style="padding: 0; overflow: hidden;">
+                        <div class="combo-card combo-5">
+                            <div class="ring-container">
+                                <svg width="80" height="80">
+                                    <circle class="ring-bg" cx="40" cy="40" r="35"></circle>
+                                    <circle class="ring-fill" cx="40" cy="40" r="35"></circle>
+                                </svg>
+                                <span class="ring-text">75%</span>
+                            </div>
+                            <div class="pulse-indicator">✓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="logo">🪝</div>
+            <p>小扣效果词典 完整版 · 想要什么效果，直接说关键词</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">组合效果关键词：combo-starlight / combo-ocean / combo-aurora / combo-glitch / combo-data</p>
+        </div>
+    </div>
+
+    <script>
+        // 生成星空
+        const starfield = document.getElementById('starfield');
+        if (starfield) {
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starfield.appendChild(star);
+            }
+        }
+
+        // 组合1的星空
+        const combo1 = document.getElementById('combo1');
+        if (combo1) {
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                combo1.appendChild(star);
+            }
+        }
+
+        // 生成粒子
+        const particles = document.getElementById('particles');
+        if (particles) {
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 3 + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // 逐字动画
+        const charAnim = document.getElementById('charAnim');
+        if (charAnim) {
+            const text = '逐字动画';
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.animationDelay = `${i * 0.1}s`;
+                charAnim.appendChild(span);
+            });
+        }
+
+        // 文字波浪
+        const textWave = document.getElementById('textWave');
+        if (textWave) {
+            const text = '波浪文字';
+            text.split('').forEach((char, i) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.animationDelay = `${i * 0.1}s`;
+                textWave.appendChild(span);
+            });
+        }
+
+        // 标签页切换
+        function switchTab(clickedTab) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            clickedTab.classList.add('active');
+        }
+
+        // 光标跟随
+        const cursorFollow = document.getElementById('cursorFollow');
+        const cursorDot = document.getElementById('cursorDot');
+        if (cursorFollow && cursorDot) {
+            cursorFollow.addEventListener('mousemove', (e) => {
+                const rect = cursorFollow.getBoundingClientRect();
+                const x = e.clientX - rect.left - 10;
+                const y = e.clientY - rect.top - 10;
+                cursorDot.style.left = x + 'px';
+                cursorDot.style.top = y + 'px';
+            });
+        }
+
+        // 磁吸效果
+        const magneticArea = document.getElementById('magneticArea');
+        const magneticBtn = document.getElementById('magneticBtn');
+        if (magneticArea && magneticBtn) {
+            magneticArea.addEventListener('mousemove', (e) => {
+                const rect = magneticBtn.getBoundingClientRect();
+                const areaRect = magneticArea.getBoundingClientRect();
+                const btnCenterX = rect.left + rect.width / 2 - areaRect.left;
+                const btnCenterY = rect.top + rect.height / 2 - areaRect.top;
+                const mouseX = e.clientX - areaRect.left;
+                const mouseY = e.clientY - areaRect.top;
+                const distX = (mouseX - btnCenterX) * 0.2;
+                const distY = (mouseY - btnCenterY) * 0.2;
+                magneticBtn.style.transform = `translate(${distX}px, ${distY}px)`;
+            });
+            magneticArea.addEventListener('mouseleave', () => {
+                magneticBtn.style.transform = 'translate(0, 0)';
+            });
+        }
+
+        // 鼠标拖尾
+        const trailArea = document.getElementById('trailArea');
+        if (trailArea) {
+            trailArea.addEventListener('mousemove', (e) => {
+                const rect = trailArea.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const dot = document.createElement('div');
+                dot.style.cssText = `position: absolute; left: ${x}px; top: ${y}px; width: 8px; height: 8px; background: #00d9ff; border-radius: 50%; pointer-events: none; animation: trailFade 0.5s ease-out forwards;`;
+                trailArea.appendChild(dot);
+                setTimeout(() => dot.remove(), 500);
+            });
+
+            // 添加拖尾动画样式
+            const style = document.createElement('style');
+            style.textContent = '@keyframes trailFade { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(0); } }';
+            document.head.appendChild(style);
+        }
+
+        // 数字跳动
+        const numberAnim = document.getElementById('numberAnim');
+        if (numberAnim) {
+            let num = 0;
+            setInterval(() => {
+                num = Math.floor(Math.random() * 10000);
+                numberAnim.textContent = num.toLocaleString();
+            }, 100);
+        }
+
+        // 粒子爆炸
+        const explosionArea = document.getElementById('explosionArea');
+        if (explosionArea) {
+            explosionArea.addEventListener('click', (e) => {
+                const rect = explosionArea.getBoundingClientRect();
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'explosion-particle';
+                    const angle = (Math.random() * 360) * Math.PI / 180;
+                    const distance = 30 + Math.random() * 50;
+                    particle.style.cssText = `left: 50%; top: 50%; --tx: ${Math.cos(angle) * distance}px; --ty: ${Math.sin(angle) * distance}px; background: hsl(${Math.random() * 360}, 100%, 50%);`;
+                    explosionArea.appendChild(particle);
+                    setTimeout(() => particle.remove(), 500);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
